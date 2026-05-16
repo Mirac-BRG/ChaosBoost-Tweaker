@@ -6,6 +6,13 @@ ChaosBoost Tweaker, sistem yöneticileri, siber güvenlik araştırmacıları ve
 
 Modern Windows sürümlerinde gömülü olarak gelen telemetri servislerini kısıtlamak, donanım kaynaklarını tüketen arka plan hizmetlerini durdurmak ve kurumsal dağıtım (deployment) süreçlerini hızlandırmak amacıyla tasarlanmıştır.
 
+### 🛡️ Şeffaflık ve Güvenlik Beyanı
+* **Açık Kaynak:** Tüm kaynak kodu herkese açıktır, bağımsız olarak incelenebilir ve denetlenebilir.
+* **Sıfır Telemetri:** Araç, kullanıcı alışkanlıklarını izlemez, veri toplamaz ve arka planda hiçbir sunucuya analitik/log göndermez.
+* **Çevrimdışı Çalışma:** Winget üzerinden yapılan harici paket indirmeleri (Cephanelik sekmesi) haricinde, tüm sistem yapılandırma ve optimizasyon modülleri aktif bir internet bağlantısı olmadan %100 yerel çalışır.
+
+---
+
 ## ⚙️ Çekirdek Mimari
 
 * **Framework:** .NET 8.0 (WPF)
@@ -25,28 +32,28 @@ Yazılım, işlevselliğine göre dört ana modüle ayrılmıştır:
 * **Arama ve Asistan İzolasyonu:** Başlat menüsü Bing web arama entegrasyonunu, Cortana'yı ve Windows kişiselleştirilmiş Reklam Kimliğini (Ad ID) kapatır. Yerel arama indekslemesini hızlandırır.
 * **Windows Update Kontrolü:** İsteğe bağlı olarak Windows Update servisini (`wuauserv`) durdurur ve otomatik güncellemeleri kilitler.
 * **UWP Modifikasyonları:** Windows 11'in sekmeli Not Defteri uygulamasını kaldırarak, sistemin derinliklerinde bulunan klasik (sekmesiz) `notepad.exe` sürümünü zorla varsayılan yapar.
-* **Kritik İmha (Edge Removal):** Dışarıdan müdahaleyle gizli `setup.exe` parametrelerini (`--force-uninstall`) tetikleyerek Microsoft Edge tarayıcısını sistemden kalıcı olarak siler ve yeniden kurulmasını kayıt defteri üzerinden mühürler.
+* **Microsoft Edge Deprovisioning (Tarayıcı Bileşeni Kaldırma):** Gizli `setup.exe` parametrelerini (`--force-uninstall`) tetikleyerek Microsoft Edge tarayıcısını sistemden kaldırır ve kayıt defteri üzerinden yeniden kurulmasını mümkün olduğunca engeller (Not: Kapsamlı Windows Major güncellemeleri bu engeli aşarak tarayıcıyı geri getirebilir).
 
 ### 2. Performans ve Ağ Yönetimi
 Donanım darboğazlarını ve ağ gecikmelerini gidermeye yönelik çekirdek yapılandırmaları içerir.
-* **Güç ve Donanım:** Gizli "Nihai Performans" (Ultimate Performance) güç planını aktifleştirir. Hibrit uyku (Hibernate) dosyasını silerek diskte GB'larca alan açar.
-* **İşlemci ve Bellek Optimizasyonu:** VBS (Virtualization-Based Security), bellek bütünlüğü ve diski sürekli meşgul eden SysMain (Superfetch) hizmetlerini kapatır.
-* **Oyun/Gecikme (Input Lag) Optimizasyonları:** Tam Ekran İyileştirmelerini (FSO), Fare İvmesini (Mouse Acceleration), Yapışkan Tuşları ve Xbox Game DVR servislerini devre dışı bırakır.
+* **Güç ve Donanım:** Gizli "Nihai Performans" (Ultimate Performance) güç planını aktifleştirir. Hibrit uyku (Hibernate) dosyasını silerek diskte alan açar.
+* **İşlemci ve Bellek Optimizasyonu:** VBS (Virtualization-Based Security), bellek bütünlüğü ve SysMain (Superfetch) hizmetlerini kapatır.
+* **Oyun ve Gecikme (Input Lag) Optimizasyonları:** Tam Ekran İyileştirmelerini (FSO), Fare İvmesini (Mouse Acceleration), Yapışkan Tuşları ve Xbox Game DVR servislerini devre dışı bırakır.
 * **Siber Güvenlik ve Ağ:** * Medya ağ kısıtlamasını (Network Throttling) kaldırır.
-  * Ağ bağdaştırıcılarını donanım seviyesinde Cloudflare DNS (1.1.1.1 / 1.0.0.1) sunucularına yönlendirir.
+  * Ağ bağdaştırıcılarını Cloudflare DNS (1.1.1.1 / 1.0.0.1) sunucularına yönlendirir.
   * Yanal hareket ve fidye virüsü (WannaCry vb.) zafiyetleri barındıran **SMBv1 protokolünü DISM üzerinden devre dışı bırakır.**
 
 ### 3. Otomatize Cephanelik (Deployment)
 Format veya yeni kurulum sonrası gerekli temel bileşenlerin Windows Package Manager (Winget) aracılığıyla sessiz (silent) kurulumunu gerçekleştirir.
-* Sistem Kütüphaneleri (Visual C++ Redistributable Tüm Sürümler, DirectX End-User Runtime)
-* Geliştirici ve Verimlilik Araçları (Notepad++, Everything, SumatraPDF, ShareX, ImageGlass)
-* İletişim Araçları (Discord, Telegram, qBittorrent)
+* **Sistem Kütüphaneleri:** Visual C++ Redistributable Tüm Sürümler, DirectX End-User Runtime
+* **Verimlilik Araçları:** Notepad++, Everything, SumatraPDF, ShareX, ImageGlass
+* **İletişim ve Ağ Araçları:** Discord, Telegram Desktop, qBittorrent
 
 ### 4. LTSC Entegrasyon Modülü
-Kurumsal Windows 10/11 Enterprise LTSC sürümlerinde eksik olan resmi paketlerin (dependency) sisteme dışarıdan enjekte edilmesini sağlar.
+Kurumsal Windows 10/11 Enterprise LTSC sürümlerinde eksik olan resmi paketlerin sisteme enjekte edilmesini sağlar.
 * `wsreset` ve Winget komut zinciri ile Microsoft Store ve Xbox Oyun Hizmetleri entegrasyonu.
-* Modern Windows Araçları (Yeni Hesap Makinesi, Ekran Alıntısı Aracı) ve HEVC/VP9 Medya Çözücüleri kurulumu.
-* Eski donanım ve yazılım uyumluluğu için .NET Framework 3.5 ve DirectPlay aktivasyonu.
+* Modern Windows Araçları (Hesap Makinesi, Ekran Alıntısı Aracı) ve HEVC/VP9 Medya Çözücüleri kurulumu.
+* .NET Framework 3.5 ve DirectPlay aktivasyonu.
 
 ---
 
@@ -59,10 +66,11 @@ Kurumsal Windows 10/11 Enterprise LTSC sürümlerinde eksik olan resmi paketleri
 
 ---
 
-## ⚠️ Sorumluluk Reddi (Disclaimer)
+## ⚠️ Sorumluluk Reddi ve Sistem Değişkenleri
 
-Bu araç, işletim sisteminin çekirdek hizmetlerine, ağ protokollerine ve kayıt defteri ayarlarına (Regedit) derin düzeyde yetkili müdahaleler gerçekleştirir. 
-* Microsoft Edge'in silinmesi, işletim sisteminin "Widgets" (Araç Takımları) menüsünün çalışmasını engelleyebilir.
-* Windows Update servisinin ve VBS özelliklerinin kapatılması, sistemin güncel siber güvenlik yamalarını almasını durdurabilir.
+Bu araç, işletim sisteminin çekirdek hizmetlerine, ağ protokollerine ve kayıt defteri ayarlarına (Regedit) derin düzeyde müdahaleler gerçekleştirir. Lütfen aşağıdaki hususları dikkate alın:
 
-**Yazılımın kullanımı tamamen kullanıcının kendi inisiyatifinde ve sorumluluğundadır.** Kurumsal, üretim (production) veya kritik veri barındıran sunucularda (Server) kullanılmadan önce test ortamlarında/sanal makinelerde denenmesi şiddetle tavsiye edilir.
+* **Performans Kazanımı Değişkenliği:** SysMain, VBS kapatma, Ağ Kısıtlaması (Network Throttling) iptali, Update kapatma ve Tam Ekran İyileştirmeleri (FSO) gibi özelliklerin modifiye edilmesi her sistemde mutlak bir performans artışı sağlamayabilir. Elde edilecek kazanç; sisteminizin donanımına (SSD hızları, CPU mimarisi), sürücülerinize ve kullandığınız spesifik Windows derleme (build) sürümüne göre değişiklik gösterebilir.
+* **Bileşen Bağımlılıkları:** Microsoft Edge'in kaldırılması, işletim sistemindeki "Widgets" (Araç Takımları) veya web tabanlı arama sonuçlarının çalışmasını etkileyebilir. Benzer şekilde, Windows Update veya VBS'in devre dışı bırakılması sistemin kritik güvenlik yamalarından mahrum kalmasına neden olabilir.
+
+**Yazılımın kullanımı tamamen kullanıcının kendi inisiyatifinde ve sorumluluğundadır.** Üretim (production) veya kritik veri barındıran makinelerde kullanılmadan önce test ortamlarında denenmesi şiddetle tavsiye edilir.
