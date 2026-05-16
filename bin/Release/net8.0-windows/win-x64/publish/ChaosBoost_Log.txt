@@ -1,6 +1,0 @@
-[15.04.2026 15:23:29] - ==================================================
-[15.04.2026 15:23:29] - ChaosBoost Tweaker Başlatıldı. Yönetici yetkileri devrede.
-[15.04.2026 15:23:31] - ChaosBoost Tweaker Kapatıldı.
-[17.04.2026 14:29:09] - ==================================================
-[17.04.2026 14:29:09] - ChaosBoost Tweaker Başlatıldı. Yönetici yetkileri devrede.
-[17.04.2026 14:29:11] - ChaosBoost Tweaker Kapatıldı.

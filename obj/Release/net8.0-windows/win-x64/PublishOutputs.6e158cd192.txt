@@ -1,2 +1,0 @@
-C:\Users\MiracLE\source\repos\ChaosBoostTweaker\ChaosBoostTweaker\bin\Release\net8.0-windows\win-x64\publish\ChaosBoostTweaker.pdb
-C:\Users\MiracLE\source\repos\ChaosBoostTweaker\ChaosBoostTweaker\bin\Release\net8.0-windows\win-x64\publish\ChaosBoostTweaker.exe
