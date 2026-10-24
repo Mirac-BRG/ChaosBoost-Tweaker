@@ -16,6 +16,7 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
+            <Setter Property="BorderBrush" Value="#77FFFFFF"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -25,7 +26,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="6" BorderBrush="#77FFFFFF" BorderThickness="1">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -42,6 +43,25 @@
                         </Setter.Value>
                     </Setter>
                     <Setter Property="BorderBrush" Value="#AAFFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- SoundVibe: sade pembe / Frutiger Aero vurgusu -->
+        <Style x:Key="SoundVibeButton" BasedOn="{StaticResource AeroButton}" TargetType="Button">
+            <Setter Property="Foreground" Value="#FFF5FB"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#CCDA76B0" Offset="0"/>
+                        <GradientStop Color="#AA883665" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#FFC4E5"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D66CA7"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -162,14 +182,14 @@
                     <Grid x:Name="PanelHizliAyarlar" Visibility="Visible">
                         <StackPanel>
                             <TextBlock Text="Sistem Optimizasyonu" Foreground="White" FontSize="26" FontWeight="Bold" Margin="0,0,0,10"/>
-                            <TextBlock Text="Gereksiz servisleri kökünden kapatın ve sistemi güvenceye alın." Foreground="#AAAAAA" FontSize="14" Margin="0,0,0,15"/>
+                            <TextBlock Text="Windows servislerini, gizlilik tercihlerini ve sistem ayarlarını yönetin." Foreground="#AAAAAA" FontSize="14" Margin="0,0,0,15"/>
 
                             <ScrollViewer VerticalScrollBarVisibility="Auto" Height="480" PanningMode="VerticalOnly">
                                 <StackPanel Margin="0,0,15,0">
                                     <Grid Margin="0,0,0,25">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Sistem Geri Yükleme Noktası Oluştur" Foreground="#FFD700" FontSize="16" FontWeight="Bold"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Olası hatalara karşı sistemi güvenceye alır. İşlem yapmadan önce şiddetle önerilir."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Sistem Koruması etkinse bir geri yükleme noktası oluşturur. Kişisel dosyalar için tam yedek yerine geçmez."/>
                                         </StackPanel>
                                         <Button Content="OLUŞTUR" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnRestorePoint_Click"/>
                                     </Grid>
@@ -177,7 +197,7 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Windows Telemetri ve Veri Toplamayı Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Microsoft'un arka planda kullanım verilerinizi toplamasını engeller ve gizliliğinizi korur."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Tanılama verisi ilkesini yapılandırır ve DiagTrack hizmetini kapatmayı dener. Etki Windows sürümüne göre değişir."/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Content="GERİ AL" Width="80" Style="{StaticResource UndoButton}" Margin="0,10,10,0" Click="BtnTelemetriGeriAl_Click"/>
@@ -187,7 +207,7 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Başlat Menüsü Bing Aramasını Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Sadece yerel arama yapmasını sağlar, menüyü inanılmaz hızlandırır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Başlat menüsünde web arama önerilerini sınırlandırmaya yönelik kayıt defteri ayarlarını uygular."/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Content="GERİ AL" Width="80" Style="{StaticResource UndoButton}" Margin="0,10,10,0" Click="BtnBingGeriAl_Click"/>
@@ -197,7 +217,7 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Cortana'yı Devre Dışı Bırak" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Arka planda çalışabilen gereksiz asistanı kapatır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Cortana için ilgili Windows politikasını yapılandırır. Destek sürüme göre değişir."/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Content="GERİ AL" Width="80" Style="{StaticResource UndoButton}" Margin="0,10,10,0" Click="BtnCortanaGeriAl_Click"/>
@@ -217,7 +237,7 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Windows Hata Bildirimini (WER) Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Arka planda Microsoft'a veri ve hata raporu gönderimini engeller."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Windows Hata Bildirimi politikasını devre dışı bırakacak şekilde ayarlar."/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Content="GERİ AL" Width="80" Style="{StaticResource UndoButton}" Margin="0,10,10,0" Click="BtnWERGeriAl_Click"/>
@@ -226,8 +246,8 @@
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBlock Text="Konum Takibini ve Geçmişini Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Masaüstü kullanıcıları için genellikle gereksiz olan konum servislerini kapatır."/>
+                                            <TextBlock Text="Windows Konum Hizmeti İlkesini Yapılandır" Foreground="LightGray" FontSize="16"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Sistem genelindeki konum erişim politikasını değiştirir. Konuma ihtiyaç duyan uygulamalar etkilenebilir."/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Content="GERİ AL" Width="80" Style="{StaticResource UndoButton}" Margin="0,10,10,0" Click="BtnKonumGeriAl_Click"/>
@@ -236,8 +256,8 @@
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBlock Text="Windows Update'i Tamamen Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Arka planda habersiz güncelleme indirmesini ve sistemi yormasını engeller."/>
+                                            <TextBlock Text="Windows Update Hizmetini Devre Dışı Bırak (Riskli)" Foreground="LightGray" FontSize="16"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Otomatik güncelleme ilkesini değiştirir ve Update hizmetini durdurmayı dener. Güvenlik yamaları gecikebilir."/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                             <Button Content="GERİ AL" Width="80" Style="{StaticResource UndoButton}" Margin="0,10,10,0" Click="BtnUpdateGeriAl_Click"/>
@@ -247,21 +267,21 @@
 
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBlock Text="Klasik Windows 10 Not Defterini Aç (Sekmesiz)" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Windows 11'in hantal, sekmeli UWP Not Defterini iptal edip, anında açılan eski hafif .exe sürümünü geri getirir."/>
+                                            <TextBlock Text="Klasik Not Defteri Hakkında (Güvenli)" Foreground="LightGray" FontSize="16"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Riskli IFEO/uygulama kaldırma yöntemi kullanılmaz; klasik sürüm sınırlamaları açıklanır."/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Content="GERİ AL" Width="80" Style="{StaticResource UndoButton}" Margin="0,10,10,0" Click="BtnClassicNotepadGeriAl_Click"/>
+                                            <Button Content="STORE’DA AÇ" Width="100" Style="{StaticResource UndoButton}" Margin="0,10,10,0" Click="BtnClassicNotepadGeriAl_Click"/>
                                             <Button Content="UYGULA" Width="80" Style="{StaticResource AeroButton}" Click="BtnClassicNotepad_Click"/>
                                         </StackPanel>
                                     </Grid>
 
                                     <Grid Margin="0,0,0,25">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBlock Text="Microsoft Edge'i Sistemden Kazı (Nükleer)" Foreground="#FF4444" FontSize="16" FontWeight="Bold"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="DİKKAT: Edge'i kalıcı olarak siler ve Windows Update'in tekrar kurmasını engeller. Widgets menüsünü bozabilir."/>
+                                            <TextBlock Text="Microsoft Edge Tarayıcısını Kaldır" Foreground="#FF4444" FontSize="16" FontWeight="Bold"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Kullanıcı onayıyla Edge kaldırma komutunu dener. Başarı garanti değildir; Windows özellikleri etkilenebilir."/>
                                         </StackPanel>
-                                        <Button Content="YOK ET" Width="90" HorizontalAlignment="Right" Foreground="White" Background="#88FF0000" BorderBrush="#AAFF3333" Cursor="Hand" Click="BtnEdgeSil_Click">
+                                        <Button Content="KALDIR" Width="90" HorizontalAlignment="Right" Foreground="White" Background="#88FF0000" BorderBrush="#AAFF3333" Cursor="Hand" Click="BtnEdgeSil_Click">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
                                                     <Border Background="{TemplateBinding Background}" CornerRadius="6" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
@@ -282,7 +302,7 @@
                     <Grid x:Name="PanelPerformans" Visibility="Hidden">
                         <StackPanel>
                             <TextBlock Text="Performans ve Ağ Seçenekleri" Foreground="White" FontSize="26" FontWeight="Bold" Margin="0,0,0,10"/>
-                            <TextBlock Text="Kısıtlamaları kaldırın, gecikmeyi düşürün ve tam kontrolü ele alın." Foreground="#AAAAAA" FontSize="14" Margin="0,0,0,15"/>
+                            <TextBlock Text="Güç planlarını, oyun tercihlerini ve ağ yapılandırmalarını yönetin." Foreground="#AAAAAA" FontSize="14" Margin="0,0,0,15"/>
 
                             <ScrollViewer VerticalScrollBarVisibility="Auto" Height="480" PanningMode="VerticalOnly">
                                 <StackPanel Margin="0,0,15,0">
@@ -291,35 +311,35 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Nihai Performans Güç Planını Aç" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Microsoft'un gizlediği, donanımın %100 gücünü kısıtlamasız kullanan modu aktif eder."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Ultimate Performance güç planını oluşturmaya ve etkinleştirmeye çalışır. Her cihazda desteklenmez."/>
                                         </StackPanel>
                                         <Button Content="AKTİF ET" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnUltimatePower_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="VBS ve Memory Integrity Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Windows 11'in donanımı yoran çekirdek yalıtımını kapatarak oyunlarda FPS artışı sağlar."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="VBS ve Windows hiper yöneticisinin başlatılmasını etkileyen ayarları değiştirir. WSL2/Hyper-V etkilenebilir."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnVBS_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Xbox Game DVR ve Game Bar Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Arka planda sürekli ekran kaydı alarak sistemi yoran Xbox servislerini susturur."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Game DVR kayıt defteri ve politika ayarlarını değiştirir. Game Bar uygulamasını tamamen kaldırmaz."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnXboxDVR_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Hibrit Uyku ve Hazırda Beklet (Hibernate) Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="SSD'nizin ömrünü korur ve diskte anında gigabaytlarca boş alan yaratır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Hazırda bekletmeyi ve Hızlı Başlatma kullanımını kapatır; hiberfil.sys dosyasının kapladığı alanı boşaltabilir."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnHibernate_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Fare İvmesini (Acceleration) Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Fiziksel fare hareketinizin Windows tarafından yapay olarak hızlandırılmasını engeller (Kas hafızası için şarttır)."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Windows fare işaretçisi ivmesi ayarlarını değiştirir. Oyunlar ham fare girdisi kullanabilir."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnMouseAccel_Click"/>
                                     </Grid>
@@ -327,21 +347,21 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Yapışkan Tuşları (Sticky Keys) Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Oyunun ortasında Shift tuşuna art arda basınca çıkan o sinir bozucu pencereyi kökünden kazır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Yapışkan Tuşlar ve ilgili erişilebilirlik kısayollarının etkinleşme davranışını değiştirir."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnStickyKeys_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Tam Ekran İyileştirmelerini Kapat (FSO)" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Oyunları sahte tam ekrandan kurtarıp saf Özel Tam Ekran moduna zorlar. Gecikmeyi (Input Lag) düşürür."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Windows tam ekran optimizasyonu kayıt defteri ayarlarını değiştirir. Her oyunda gecikme azalması garanti edilmez."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnFSO_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="SysMain (Superfetch) Hizmetini Durdur" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Arka planda diski ve RAM'i gereksiz yere sömüren önbellekleme servisini kapatır. SSD ömrünü uzatır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="SysMain önbellekleme hizmetini devre dışı bırakır. Performans etkisi donanım ve kullanım senaryosuna bağlıdır."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnSysMain_Click"/>
                                     </Grid>
@@ -350,21 +370,21 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Ağ Gecikmesini (Network Throttling) Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Medya servislerinin interneti kısıtlamasını engeller, veri akışını tam hıza çıkarır (Ping düşürür)."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Multimedia SystemProfile altındaki NetworkThrottlingIndex değerini değiştirir. Ping düşüşü garanti edilmez."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnNetThrottling_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Cloudflare DNS'e Geç (1.1.1.1)" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Ağ bağdaştırıcınızın DNS'ini en hızlı ve güvenli sunuculara yönlendirir."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Etkin ağ bağdaştırıcılarının DNS sunucularını Cloudflare (1.1.1.1 / 1.0.0.1) olarak ayarlar."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnDNS_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="WannaCry Açığını (SMBv1) Kapat" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Eski ve güvensiz dosya paylaşım protokolünü kapatarak fidye virüslerine karşı ağı kilitler."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="SMBv1 protokolünü devre dışı bırakmayı dener. Eski cihazlarla dosya paylaşımı etkilenebilir."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnSMBv1_Click"/>
                                     </Grid>
@@ -373,21 +393,21 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Windows 11 Klasik Sağ Tık Menüsü" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Sinir bozucu 'Diğer seçenekleri göster' menüsünü iptal edip eski hızlı sağ tık menüsünü getirir."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Windows 11 için klasik bağlam menüsüyle ilgili kayıt defteri ayarını uygular."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnWin11Menu_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <TextBlock Text="Dosya Uzantılarını ve Gizli Dosyaları Göster" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Sistem yöneticisi görüşünü açar. Dosyaların gerçek uzantılarını (.exe, .bat) gizlenmeden görürsünüz."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Gizli dosyaları ve bilinen dosya türlerinin uzantılarını görünür yapar."/>
                                         </StackPanel>
                                         <Button Content="UYGULA" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnShowHidden_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBlock Text="Gereksiz UWP Çöplerini Sil (Arınma)" Foreground="LightGray" FontSize="16"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Sisteme gömülü gelen gereksiz reklam uygulamalarını (Bing, Solitaire, Zune vb.) silip atar."/>
+                                            <TextBlock Text="Seçili Ön Yüklü UWP Uygulamalarını Kaldır" Foreground="LightGray" FontSize="16"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Bing, People, Solitaire ve Zune eşleşen kullanıcı uygulama paketlerini kaldırmayı dener."/>
                                         </StackPanel>
                                         <Button Content="SİL" Width="90" HorizontalAlignment="Right" Style="{StaticResource UndoButton}" Click="BtnUwpBloat_Click"/>
                                     </Grid>
@@ -399,23 +419,46 @@
                     <Grid x:Name="PanelCephanelik" Visibility="Hidden">
                         <StackPanel>
                             <TextBlock Text="Uygulama Cephaneliği" Foreground="White" FontSize="26" FontWeight="Bold" Margin="0,0,0,10"/>
-                            <TextBlock Text="Format sonrası olmazsa olmaz donanımları sessizce kurun." Foreground="#AAAAAA" FontSize="14" Margin="0,0,0,20"/>
+                            <TextBlock Text="Format sonrası ihtiyaç duyduğunuz uygulamaları tek noktadan kurun." Foreground="#AAAAAA" FontSize="14" Margin="0,0,0,20"/>
                             <ScrollViewer VerticalScrollBarVisibility="Auto" Height="480" PanningMode="VerticalOnly">
                                 <StackPanel Margin="0,0,15,0">
+                                    <Border Background="#1B88CCFF" BorderBrush="#4488CCFF" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,15">
+                                        <StackPanel>
+                                            <TextBlock Text="HIZLI BAŞLANGIÇ" Foreground="#88CCFF" FontSize="14" FontWeight="Bold"/>
+                                            <TextBlock Text="7-Zip, Notepad++, Everything ve VLC'yi onayınızla sırayla kurar." Foreground="LightGray" FontSize="12" TextWrapping="Wrap" Margin="0,6,0,4"/>
+                                            <Button Content="TEMEL PAKETİ KUR" Width="160" HorizontalAlignment="Left" Style="{StaticResource AeroButton}" Click="BtnTemelPaketKur_Click"/>
+                                        </StackPanel>
+                                    </Border>
                                     <TextBlock Text="OLMAZSA OLMAZ BİLEŞENLER" Foreground="#FF5555" FontSize="14" FontWeight="Bold" Margin="0,10,0,10"/>
                                     <Grid Margin="0,0,0,10">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Visual C++ Redistributable (Tümü)" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Oyunların ve çoğu programın hatasız çalışması için sistemin belkemiğidir."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Microsoft Visual C++ 2015 ve sonrası için x86/x64 çalışma zamanı paketlerini kurar."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnVCRedistKur_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="DirectX End-User Runtime" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Özellikle LTSC sürümlerinde ve oyuncular için şart olan grafik kütüphaneleridir."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Eski oyunlar için gereken bazı DirectX çalışma zamanı bileşenlerini kurmayı dener."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnDirectXKur_Click"/>
+                                    </Grid>
+
+                                    <TextBlock Text="ARŞİV &amp; SIKIŞTIRMA" Foreground="#FF5555" FontSize="14" FontWeight="Bold" Margin="0,15,0,10"/>
+                                    <Grid Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="WinRAR" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="RAR arşivleri için yaygın kullanılan ticari yazılım. Deneme/lisans koşulları geçerlidir."/>
+                                        </StackPanel>
+                                        <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnWinRarKur_Click"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="7-Zip (Açık Kaynak)" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Ücretsiz ve açık kaynaklı arşiv yöneticisi. ZIP, 7z ve RAR açma dahil yaygın biçimleri destekler."/>
+                                        </StackPanel>
+                                        <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="Btn7ZipKur_Click"/>
                                     </Grid>
 
                                     <TextBlock Text="TEMEL &amp; HAFİF ARAÇLAR" Foreground="#FF5555" FontSize="14" FontWeight="Bold" Margin="0,10,0,10"/>
@@ -429,30 +472,46 @@
                                     <Grid Margin="0,0,0,10">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Everything" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Dosyaları anında bulur, arka planda hiç RAM tüketmez. En iyi arama motorudur."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Dosya adlarını indeksleyerek hızlı arama sağlayan Windows masaüstü uygulaması."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnEverythingKur_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,10">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="SumatraPDF" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Adobe Acrobat yerine piyasadaki en hafif, en hızlı PDF okuyucusudur."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="PDF ve çeşitli e-kitap biçimlerini destekleyen hafif belge görüntüleyicisi."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnSumatraKur_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,10">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="ShareX" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Ekran görüntüsü alma ve kaydetme konusunda en hafif, açık kaynaklı araçtır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Ekran görüntüsü alma, düzenleme ve paylaşma işlevleri sunan açık kaynaklı araç."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnShareXKur_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="ImageGlass" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Hantal Windows Fotoğraflar uygulamasının yerine çok hafif ve her formatı açan bir alternatiftir."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Yaygın görüntü dosyası biçimlerini destekleyen alternatif görüntüleyici."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnImageGlassKur_Click"/>
+                                    </Grid>
+
+                                    <TextBlock Text="MÜZİK &amp; VİDEO" Foreground="#FF5555" FontSize="14" FontWeight="Bold" Margin="0,15,0,10"/>
+                                    <Grid Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Spotify" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Müzik ve podcast oynatıcısı. Kullanımı Spotify hesabı gerektirebilir."/>
+                                        </StackPanel>
+                                        <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnSpotifyKur_Click"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="VLC Media Player" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Açık kaynaklı video ve ses oynatıcısı."/>
+                                        </StackPanel>
+                                        <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnVLCKur_Click"/>
                                     </Grid>
 
                                     <TextBlock Text="İLETİŞİM &amp; İNTERNET" Foreground="#FF5555" FontSize="14" FontWeight="Bold" Margin="0,10,0,10"/>
@@ -466,17 +525,62 @@
                                     <Grid Margin="0,0,0,10">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Telegram Desktop" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="WhatsApp'a kıyasla bilgisayarı yormayan, bağımsız çalışan mesajlaşma uygulamasıdır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Çoklu cihaz ve masaüstü desteği olan mesajlaşma uygulaması."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnTelegramKur_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="qBittorrent" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Reklam dolu uTorrent yerine, açık kaynaklı, reklamsız ve hafif torrent istemcisidir."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Açık kaynaklı, reklamsız BitTorrent istemcisi."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnQbitKur_Click"/>
                                     </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="SplitWire-Turkey (DPI)" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Resmi SplitWire 1.5.7 kurulum paketini SHA-256 doğrulamasıyla indirir, onayınızdan sonra otomatik kurar ve açmayı dener. DPI yöntemi SplitWire içinden ayrıca seçilir; ağ ayarları izinsiz değiştirilmez."/>
+                                        </StackPanel>
+                                        <Button Content="KUR &amp; AÇ" Width="100" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnSplitWireKur_Click"/>
+                                    </Grid>
+
+
+                                    <TextBlock Text="GELİŞTİRİCİ &amp; WINDOWS ARAÇLARI" Foreground="#FF5555" FontSize="14" FontWeight="Bold" Margin="0,15,0,10"/>
+                                    <Grid Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Git for Windows" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Git sürüm kontrol aracını kurar."/>
+                                        </StackPanel>
+                                        <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnGitKur_Click"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Visual Studio Code" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Kod editörü. Visual Studio IDE yerine geçmez."/>
+                                        </StackPanel>
+                                        <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnVSCodeKur_Click"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Microsoft PowerToys" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Microsoft tarafından geliştirilen Windows üretkenlik araçları."/>
+                                        </StackPanel>
+                                        <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnPowerToysKur_Click"/>
+                                    </Grid>
+                                    <TextBlock Text="CHAOSBOOST PROJELERİ" Foreground="#FF5555" FontSize="14" FontWeight="Bold" Margin="0,15,0,10"/>
+                                    <Border Background="#1FDD73AE" BorderBrush="#448D426B" BorderThickness="1" CornerRadius="8" Padding="10,8" Margin="0,3,0,10">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="✦ SoundVibe" Foreground="#FFC1DD" FontSize="17" FontWeight="SemiBold"/>
+                                                <TextBlock Text="ChaosBoost geliştiricisinden • Frutiger Aero müzik oynatıcı" Foreground="#DDB3CD" FontSize="11" TextWrapping="Wrap" Margin="0,4,5,0"/>
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Content="İNDİR" Width="100" VerticalAlignment="Center" Style="{StaticResource SoundVibeButton}" ToolTip="Resmi SoundVibe v1.0 kurulum dosyasını SHA-256 doğrulamasıyla indirir ve kurulumu başlatır." Click="BtnSoundVibeIndir_Click"/>
+                                        </Grid>
+                                    </Border>
                                 </StackPanel>
                             </ScrollViewer>
                         </StackPanel>
@@ -499,7 +603,7 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Microsoft Store'u Kur" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="LTSC'nin eksik bıraktığı resmi mağazayı sisteme kurar. Sürücü kontrol panelleri için hayat kurtarır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Desteklenen Windows LTSC sürümlerinde Microsoft Store kurulumunu başlatmayı dener."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnMsStore_Click"/>
                                     </Grid>
@@ -514,7 +618,7 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="HEVC / VP9 Medya Çözücüleri" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Siyah ekran sorunlarını çözmek için H.265 ve VP9 video formatlarını destekleyen bileşenlerdir."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Desteklenen sistemlerde HEVC ve VP9 medya uzantılarını kurmayı dener."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnCodecKur_Click"/>
                                     </Grid>
@@ -528,14 +632,14 @@
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="DirectPlay (Eski Oyun Desteği)" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Age of Empires, eski NFS gibi nostaljik oyunların LTSC'de açılması için şarttır."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Bazı eski oyun ve uygulamaların kullandığı isteğe bağlı Windows özelliğidir."/>
                                         </StackPanel>
                                         <Button Content="AKTİF ET" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnDirectPlay_Click"/>
                                     </Grid>
                                     <Grid Margin="0,0,0,15">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text=".NET Framework 3.5" Foreground="LightGray" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Eski mühendislik programlarının ve yazılımların hatasız çalışması için çekirdek paketi kurar."/>
+                                            <TextBlock Text="❓" Style="{StaticResource InfoText}" ToolTip="Bazı eski Windows yazılımlarının ihtiyaç duyduğu .NET Framework 3.5 özelliğini etkinleştirir."/>
                                         </StackPanel>
                                         <Button Content="YÜKLE" Width="90" HorizontalAlignment="Right" Style="{StaticResource AeroButton}" Click="BtnNet35_Click"/>
                                     </Grid>
@@ -551,7 +655,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="TxtDurum" Text="Sistem Hazır. Emir bekleniyor..." Foreground="#88CCFF" FontSize="14" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="TxtDurum" Text="Sistem hazır. İşlem seçebilirsiniz." Foreground="#88CCFF" FontSize="14" VerticalAlignment="Center" FontWeight="SemiBold"/>
                         <ProgressBar x:Name="DurumCubugu" Grid.Column="1" Height="4" Margin="20,0,0,0" Background="#22FFFFFF" Foreground="#00FFCC" BorderThickness="0" IsIndeterminate="True" VerticalAlignment="Center" Visibility="Hidden"/>
                     </Grid>
                 </Border>
