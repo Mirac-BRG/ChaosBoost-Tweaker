@@ -121,7 +121,7 @@ Hata bildirmek, iyileştirme önermek veya yeni özellik istemek için [Issues](
 
 ## 👤 Geliştirici
 
-**[Mirac-BRG](https://github.com/Mirac-BRG)**
+**[QT-DelayLess](https://github.com/QT-DelayLess)**
 
 ---
 
